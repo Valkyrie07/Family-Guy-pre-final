@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+
+
+  </head>
+  <body>
+
+      <form action="index.html" class="login-form">
+        <h1>Helló újra!</h1>
+
+        <div class="txtb">
+          <input type="text">
+          <span data-placeholder="Felhaszálónév"></span>
+        </div>
+
+        <div class="txtb">
+          <input type="password">
+          <span data-placeholder="Jelszó"></span>
+        </div>
+
+        <input type="submit" class="logbtn" value="Bejelentkezés">
+
+        <div class="bottom-text">
+          Nincs fiókod? <a href="signup.html">Regisztráció</a>
+        </div>
+
+      </form>
+
+      <script>
+        document.write('<a href="web33.html">Fórum</a>');
+      </script>
+
+      <script type="text/javascript">
+      $(".txtb input").on("focus",function(){
+        $(this).addClass("focus");
+      });
+
+      $(".txtb input").on("blur",function(){
+        if($(this).val() == "")
+        $(this).removeClass("focus");
+      });
+
+      //toGoBack
+      $(document).ready(function(){
+
+        $(window).scroll(function(){
+          if($(this).scrollTop() > 40){
+            $('#topBtn').fadeIn();
+          } else{
+            $('#topBtn').fadeOut();
+          }
+        });
+
+        $("#topBtn").click(function(){
+          $('html ,body').animate({scrollTop : 0},800);
+        });
+      });
+
+      </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Family Guy Anti-Fun Club</title>
+
+	<link rel="stylesheet" type="text/css" href="web33.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<div class="header">
+  <img src="familyGuy.jpg" alt="part"  width="100%" height="100%">
+</div>
+
+
+<div class="topnav">
+  <a class="active" href="web33.html"><b>Fórum</b></a>
+  <a href="rolunk3.html">Rólunk</a>
+  <a href="szereplok3.html">Szereplők</a>
+  <a href="galeria3.html">Galéria</a>
+  <a href="evadok3.html">Évadok</a>
+	<a href="login.html">Regisztráció</a>
+  <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="column left" style="background-color:#aaa;">
+		<h4>Pontos idő:</h4>
+		<canvas id="canvas"
+		style="width: 190%">
+		</canvas>
+  </div>
+
+
+  <div class="column middle" style="background-color:#bbb;">
+    <h2>Írj Te is! Kíváncsiak vagyunk a véleményedre!</h2>
+    <p>ide jöhetnének a hozzászólások</p><br>
+	<p>Fórum</p>
+  </div>
+	
+
+<div class="column right" style="background-color:#ccc;">
+    <h4>Leggázabb képek a Family Guy-ból:</h4>
+			 <section>
+		  <img class="mySlides" src="15.jpg"
+		  style="width:100%">
+		  <img class="mySlides" src="19.jpg"
+		  style="width:100%">
+		  <img class="mySlides" src="23.jpg"
+		  style="width:100%">
+		  <img class="mySlides" src="20.jpg"
+		  style="width:100%">
+		  <img class="mySlides" src="7.jpg"
+		  style="width:100%">
+		  <img class="mySlides" src="9.jpg"
+		  style="width:100%">
+		</section>
+  </div>
+</div>
+
+<button id="topBtn"><i class="fas fa-angle-up"></i></button>
+
+<div class="footer">
+	<footer>
+		<a href="https://hu-hu.facebook.com/FamilyGuy"><i class="fab fa-facebook"></i></a>
+	  <a href="https://hu.pinterest.com/familyguyonfox/"><i class="fab fa-pinterest"></i></a>
+	  <a href="https://twitter.com/familyguyonfox"><i class="fab fa-twitter"></i></a>
+	  <a href="https://www.flickr.com/photos/29716773@N05/albums/72157607013980822/"><i class="fab fa-flickr"></i></a>
+	  <a href="https://www.linkedin.com/authwall?trk=ripf&trkInfo=AQEuu9bPu7r3nwAAAW1d-xDwF-qRKaVxNdWf8-SAPNMaNbA_eAwnP1BdO67LXhBaWhn913dg3QbXi-HmRuQ1yL4wmauidIl1t9F-4SRtyQIt3vhA_6fkxPIwNyjVXKmthP-yMRg=&originalReferer=https://www.google.com/&sessionRedirect=https%3A%2F%2Fau.linkedin.com%2Fin%2Fpeter-griffin-29b57a124"><i class="fab fa-linkedin-in"></i></a>
+  </footer>
+</div>
+
+
+<script src="web33.js">
+// Automatic Slideshow - change image every 3 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}
+  x[myIndex-1].style.display = "block";
+  setTimeout(carousel, 3000);
+}
+
+// Óra
+// Óra
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+
+//toTopScroll
+$(document).ready(function(){
+
+  $(window).scroll(function(){
+    if($(this).scrollTop() > 40){
+      $('#topBtn').fadeIn();
+    } else{
+      $('#topBtn').fadeOut();
+    }
+  });
+
+  $("#topBtn").click(function(){
+    $('html ,body').animate({scrollTop : 0},800);
+  });
+});
+</script>
+
+</body>
+</html>
